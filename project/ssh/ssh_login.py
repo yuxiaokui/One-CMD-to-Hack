@@ -1,5 +1,5 @@
 ﻿import paramiko
-import os
+import sys
 
 def exp(host,port,user,password):
     ssh = paramiko.SSHClient()
@@ -12,12 +12,12 @@ def exp(host,port,user,password):
         return False
 
 
- if __name__ == "__main__":
-    host = args[1]
-    port = int(args[2])
-    user = args[3]
-    password = args[4]
-    if exp(host,port):
+if __name__ == "__main__":
+    host = sys.argv[1]
+    port = int(sys.argv[2])
+    user = sys.argv[3]
+    password = sys.argv[4]
+    if exp(host,port,user,password):
         print("登录成功！")
     else:
         print("登录失败！")
